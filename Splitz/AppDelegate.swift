@@ -22,6 +22,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         constructMenu()
+        
+        let screens = NSScreen.screens
+        for screen in screens {
+            print(NSStringFromRect(screen.visibleFrame))
+        }
+        
+//        let mouseTimer = Timer.init(timeInterval: 0.1, repeats: true, block: {_ in
+//            let mouse = NSEvent.mouseLocation
+//            print(mouse)
+//        })
+//
+//        RunLoop.main.add(mouseTimer, forMode: .default)
+        
+        
+        NSEvent.addGlobalMonitorForEvents(matching: .leftMouseUp) { (event) in
+            let appName = NSWorkspace.shared.frontmostApplication?.localizedName
+            print("app name: \(String(describing: appName))")
+            print(NSEvent.mouseLocation)
+        }
+
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

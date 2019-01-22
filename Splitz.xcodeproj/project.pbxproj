@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DF8E609B21F6BDBA001D2434 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E609A21F6BDBA001D2434 /* AppDelegate.swift */; };
+		DF8E609D21F6BDBA001D2434 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E609C21F6BDBA001D2434 /* ViewController.swift */; };
+		DF8E609F21F6BDBC001D2434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF8E609E21F6BDBC001D2434 /* Assets.xcassets */; };
+		DF8E60A221F6BDBC001D2434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF8E60A021F6BDBC001D2434 /* Main.storyboard */; };
+		DF8E60AE21F6BDBC001D2434 /* SplitzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E60AD21F6BDBC001D2434 /* SplitzTests.swift */; };
+		DF8E60B921F6BDBC001D2434 /* SplitzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E60B821F6BDBC001D2434 /* SplitzUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DF8E60AA21F6BDBC001D2434 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF8E608F21F6BDBA001D2434 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF8E609621F6BDBA001D2434;
+			remoteInfo = Splitz;
+		};
+		DF8E60B521F6BDBC001D2434 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF8E608F21F6BDBA001D2434 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DF8E609621F6BDBA001D2434;
+			remoteInfo = Splitz;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DF8E609721F6BDBA001D2434 /* Splitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF8E609A21F6BDBA001D2434 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DF8E609C21F6BDBA001D2434 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DF8E609E21F6BDBC001D2434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DF8E60A121F6BDBC001D2434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DF8E60A321F6BDBC001D2434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF8E60A421F6BDBC001D2434 /* Splitz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Splitz.entitlements; sourceTree = "<group>"; };
+		DF8E60A921F6BDBC001D2434 /* SplitzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF8E60AD21F6BDBC001D2434 /* SplitzTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitzTests.swift; sourceTree = "<group>"; };
+		DF8E60AF21F6BDBC001D2434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF8E60B421F6BDBC001D2434 /* SplitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF8E60B821F6BDBC001D2434 /* SplitzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitzUITests.swift; sourceTree = "<group>"; };
+		DF8E60BA21F6BDBC001D2434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DF8E609421F6BDBA001D2434 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF8E60A621F6BDBC001D2434 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF8E60B121F6BDBC001D2434 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DF8E608E21F6BDBA001D2434 = {
+			isa = PBXGroup;
+			children = (
+				DF8E609921F6BDBA001D2434 /* Splitz */,
+				DF8E60AC21F6BDBC001D2434 /* SplitzTests */,
+				DF8E60B721F6BDBC001D2434 /* SplitzUITests */,
+				DF8E609821F6BDBA001D2434 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DF8E609821F6BDBA001D2434 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DF8E609721F6BDBA001D2434 /* Splitz.app */,
+				DF8E60A921F6BDBC001D2434 /* SplitzTests.xctest */,
+				DF8E60B421F6BDBC001D2434 /* SplitzUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DF8E609921F6BDBA001D2434 /* Splitz */ = {
+			isa = PBXGroup;
+			children = (
+				DF8E609A21F6BDBA001D2434 /* AppDelegate.swift */,
+				DF8E609C21F6BDBA001D2434 /* ViewController.swift */,
+				DF8E609E21F6BDBC001D2434 /* Assets.xcassets */,
+				DF8E60A021F6BDBC001D2434 /* Main.storyboard */,
+				DF8E60A321F6BDBC001D2434 /* Info.plist */,
+				DF8E60A421F6BDBC001D2434 /* Splitz.entitlements */,
+			);
+			path = Splitz;
+			sourceTree = "<group>";
+		};
+		DF8E60AC21F6BDBC001D2434 /* SplitzTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF8E60AD21F6BDBC001D2434 /* SplitzTests.swift */,
+				DF8E60AF21F6BDBC001D2434 /* Info.plist */,
+			);
+			path = SplitzTests;
+			sourceTree = "<group>";
+		};
+		DF8E60B721F6BDBC001D2434 /* SplitzUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DF8E60B821F6BDBC001D2434 /* SplitzUITests.swift */,
+				DF8E60BA21F6BDBC001D2434 /* Info.plist */,
+			);
+			path = SplitzUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DF8E609621F6BDBA001D2434 /* Splitz */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF8E60BD21F6BDBC001D2434 /* Build configuration list for PBXNativeTarget "Splitz" */;
+			buildPhases = (
+				DF8E609321F6BDBA001D2434 /* Sources */,
+				DF8E609421F6BDBA001D2434 /* Frameworks */,
+				DF8E609521F6BDBA001D2434 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Splitz;
+			productName = Splitz;
+			productReference = DF8E609721F6BDBA001D2434 /* Splitz.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DF8E60A821F6BDBC001D2434 /* SplitzTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF8E60C021F6BDBC001D2434 /* Build configuration list for PBXNativeTarget "SplitzTests" */;
+			buildPhases = (
+				DF8E60A521F6BDBC001D2434 /* Sources */,
+				DF8E60A621F6BDBC001D2434 /* Frameworks */,
+				DF8E60A721F6BDBC001D2434 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF8E60AB21F6BDBC001D2434 /* PBXTargetDependency */,
+			);
+			name = SplitzTests;
+			productName = SplitzTests;
+			productReference = DF8E60A921F6BDBC001D2434 /* SplitzTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DF8E60B321F6BDBC001D2434 /* SplitzUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DF8E60C321F6BDBC001D2434 /* Build configuration list for PBXNativeTarget "SplitzUITests" */;
+			buildPhases = (
+				DF8E60B021F6BDBC001D2434 /* Sources */,
+				DF8E60B121F6BDBC001D2434 /* Frameworks */,
+				DF8E60B221F6BDBC001D2434 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DF8E60B621F6BDBC001D2434 /* PBXTargetDependency */,
+			);
+			name = SplitzUITests;
+			productName = SplitzUITests;
+			productReference = DF8E60B421F6BDBC001D2434 /* SplitzUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DF8E608F21F6BDBA001D2434 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "yu-yk";
+				TargetAttributes = {
+					DF8E609621F6BDBA001D2434 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					DF8E60A821F6BDBC001D2434 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = DF8E609621F6BDBA001D2434;
+					};
+					DF8E60B321F6BDBC001D2434 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = DF8E609621F6BDBA001D2434;
+					};
+				};
+			};
+			buildConfigurationList = DF8E609221F6BDBA001D2434 /* Build configuration list for PBXProject "Splitz" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DF8E608E21F6BDBA001D2434;
+			productRefGroup = DF8E609821F6BDBA001D2434 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DF8E609621F6BDBA001D2434 /* Splitz */,
+				DF8E60A821F6BDBC001D2434 /* SplitzTests */,
+				DF8E60B321F6BDBC001D2434 /* SplitzUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DF8E609521F6BDBA001D2434 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF8E609F21F6BDBC001D2434 /* Assets.xcassets in Resources */,
+				DF8E60A221F6BDBC001D2434 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF8E60A721F6BDBC001D2434 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF8E60B221F6BDBC001D2434 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DF8E609321F6BDBA001D2434 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF8E609D21F6BDBA001D2434 /* ViewController.swift in Sources */,
+				DF8E609B21F6BDBA001D2434 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF8E60A521F6BDBC001D2434 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF8E60AE21F6BDBC001D2434 /* SplitzTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DF8E60B021F6BDBC001D2434 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF8E60B921F6BDBC001D2434 /* SplitzUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DF8E60AB21F6BDBC001D2434 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF8E609621F6BDBA001D2434 /* Splitz */;
+			targetProxy = DF8E60AA21F6BDBC001D2434 /* PBXContainerItemProxy */;
+		};
+		DF8E60B621F6BDBC001D2434 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DF8E609621F6BDBA001D2434 /* Splitz */;
+			targetProxy = DF8E60B521F6BDBC001D2434 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DF8E60A021F6BDBC001D2434 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DF8E60A121F6BDBC001D2434 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DF8E60BB21F6BDBC001D2434 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DF8E60BC21F6BDBC001D2434 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		DF8E60BE21F6BDBC001D2434 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Splitz/Splitz.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Splitz/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yu-yk.Splitz";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		DF8E60BF21F6BDBC001D2434 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Splitz/Splitz.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Splitz/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yu-yk.Splitz";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		DF8E60C121F6BDBC001D2434 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SplitzTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yu-yk.SplitzTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Splitz.app/Contents/MacOS/Splitz";
+			};
+			name = Debug;
+		};
+		DF8E60C221F6BDBC001D2434 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SplitzTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yu-yk.SplitzTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Splitz.app/Contents/MacOS/Splitz";
+			};
+			name = Release;
+		};
+		DF8E60C421F6BDBC001D2434 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SplitzUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yu-yk.SplitzUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_TARGET_NAME = Splitz;
+			};
+			name = Debug;
+		};
+		DF8E60C521F6BDBC001D2434 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SplitzUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yu-yk.SplitzUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_TARGET_NAME = Splitz;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DF8E609221F6BDBA001D2434 /* Build configuration list for PBXProject "Splitz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF8E60BB21F6BDBC001D2434 /* Debug */,
+				DF8E60BC21F6BDBC001D2434 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF8E60BD21F6BDBC001D2434 /* Build configuration list for PBXNativeTarget "Splitz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF8E60BE21F6BDBC001D2434 /* Debug */,
+				DF8E60BF21F6BDBC001D2434 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF8E60C021F6BDBC001D2434 /* Build configuration list for PBXNativeTarget "SplitzTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF8E60C121F6BDBC001D2434 /* Debug */,
+				DF8E60C221F6BDBC001D2434 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF8E60C321F6BDBC001D2434 /* Build configuration list for PBXNativeTarget "SplitzUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF8E60C421F6BDBC001D2434 /* Debug */,
+				DF8E60C521F6BDBC001D2434 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DF8E608F21F6BDBA001D2434 /* Project object */;
+}

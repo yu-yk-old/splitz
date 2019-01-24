@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF2CBEE321F99EC8008220A7 /* ResizeWindowScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CBEE221F99EC8008220A7 /* ResizeWindowScript.swift */; };
+		DF2CBEE521F99FEA008220A7 /* AppleScriptProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CBEE421F99FEA008220A7 /* AppleScriptProtocol.swift */; };
+		DF2CBEE821F9A187008220A7 /* AppleScriptObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF2CBEE721F9A187008220A7 /* AppleScriptObjC.framework */; };
 		DF8E609B21F6BDBA001D2434 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E609A21F6BDBA001D2434 /* AppDelegate.swift */; };
 		DF8E609D21F6BDBA001D2434 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E609C21F6BDBA001D2434 /* ViewController.swift */; };
 		DF8E609F21F6BDBC001D2434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF8E609E21F6BDBC001D2434 /* Assets.xcassets */; };
 		DF8E60A221F6BDBC001D2434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF8E60A021F6BDBC001D2434 /* Main.storyboard */; };
 		DF8E60AE21F6BDBC001D2434 /* SplitzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E60AD21F6BDBC001D2434 /* SplitzTests.swift */; };
 		DF8E60B921F6BDBC001D2434 /* SplitzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8E60B821F6BDBC001D2434 /* SplitzUITests.swift */; };
+		DF8E60CE21F8426E001D2434 /* ResizeWindowScriptObj.applescript in Sources */ = {isa = PBXBuildFile; fileRef = DF8E60CD21F8426E001D2434 /* ResizeWindowScriptObj.applescript */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF2CBEE221F99EC8008220A7 /* ResizeWindowScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeWindowScript.swift; sourceTree = "<group>"; };
+		DF2CBEE421F99FEA008220A7 /* AppleScriptProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleScriptProtocol.swift; sourceTree = "<group>"; };
+		DF2CBEE721F9A187008220A7 /* AppleScriptObjC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptObjC.framework; path = System/Library/Frameworks/AppleScriptObjC.framework; sourceTree = SDKROOT; };
 		DF8E609721F6BDBA001D2434 /* Splitz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8E609A21F6BDBA001D2434 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF8E609C21F6BDBA001D2434 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +53,7 @@
 		DF8E60B421F6BDBC001D2434 /* SplitzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SplitzUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF8E60B821F6BDBC001D2434 /* SplitzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitzUITests.swift; sourceTree = "<group>"; };
 		DF8E60BA21F6BDBC001D2434 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF8E60CD21F8426E001D2434 /* ResizeWindowScriptObj.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = ResizeWindowScriptObj.applescript; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF2CBEE821F9A187008220A7 /* AppleScriptObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF2CBEE621F9A187008220A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DF2CBEE721F9A187008220A7 /* AppleScriptObjC.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DF8E608E21F6BDBA001D2434 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +97,7 @@
 				DF8E60AC21F6BDBC001D2434 /* SplitzTests */,
 				DF8E60B721F6BDBC001D2434 /* SplitzUITests */,
 				DF8E609821F6BDBA001D2434 /* Products */,
+				DF2CBEE621F9A187008220A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,8 +114,12 @@
 		DF8E609921F6BDBA001D2434 /* Splitz */ = {
 			isa = PBXGroup;
 			children = (
+				DF8E60C621F8163F001D2434 /* AppleScript */,
 				DF8E609A21F6BDBA001D2434 /* AppDelegate.swift */,
+				DF2CBEE221F99EC8008220A7 /* ResizeWindowScript.swift */,
+				DF2CBEE421F99FEA008220A7 /* AppleScriptProtocol.swift */,
 				DF8E609C21F6BDBA001D2434 /* ViewController.swift */,
+				DF8E60CD21F8426E001D2434 /* ResizeWindowScriptObj.applescript */,
 				DF8E609E21F6BDBC001D2434 /* Assets.xcassets */,
 				DF8E60A021F6BDBC001D2434 /* Main.storyboard */,
 				DF8E60A321F6BDBC001D2434 /* Info.plist */,
@@ -122,6 +144,13 @@
 				DF8E60BA21F6BDBC001D2434 /* Info.plist */,
 			);
 			path = SplitzUITests;
+			sourceTree = "<group>";
+		};
+		DF8E60C621F8163F001D2434 /* AppleScript */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppleScript;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +221,11 @@
 				TargetAttributes = {
 					DF8E609621F6BDBA001D2434 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 					DF8E60A821F6BDBC001D2434 = {
 						CreatedOnToolsVersion = 10.1;
@@ -256,6 +290,9 @@
 			files = (
 				DF8E609D21F6BDBA001D2434 /* ViewController.swift in Sources */,
 				DF8E609B21F6BDBA001D2434 /* AppDelegate.swift in Sources */,
+				DF8E60CE21F8426E001D2434 /* ResizeWindowScriptObj.applescript in Sources */,
+				DF2CBEE521F99FEA008220A7 /* AppleScriptProtocol.swift in Sources */,
+				DF2CBEE321F99EC8008220A7 /* ResizeWindowScript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

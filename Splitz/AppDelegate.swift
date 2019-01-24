@@ -7,12 +7,11 @@
 //
 
 import Cocoa
+import Carbon
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
-    
-    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -23,25 +22,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         constructMenu()
         
-        let screens = NSScreen.screens
-        for screen in screens {
-            print(NSStringFromRect(screen.visibleFrame))
-        }
+//        let screens = NSScreen.screens
+//        for screen in screens {
+//            print(NSStringFromRect(screen.visibleFrame))
+//        }
         
-//        let mouseTimer = Timer.init(timeInterval: 0.1, repeats: true, block: {_ in
-//            let mouse = NSEvent.mouseLocation
-//            print(mouse)
-//        })
-//
-//        RunLoop.main.add(mouseTimer, forMode: .default)
+        ResizeWindowScript.load()
+        let resizeScript = ResizeWindowScript.resizeWindow() as! AppleScriptProtocol
         
-        
-        NSEvent.addGlobalMonitorForEvents(matching: .leftMouseUp) { (event) in
+        NSEvent.addGlobalMonitorForEvents(matching: .leftMouseUp) { (mevent) in
             let appName = NSWorkspace.shared.frontmostApplication?.localizedName
             print("app name: \(String(describing: appName))")
             print(NSEvent.mouseLocation)
-        }
+            
+            let mainScreen = NSScreen.main
+            print(NSStringFromRect((mainScreen!.frame)))
+            
+            resizeScript.resizeWindow()
 
+//            let parameters = NSAppleEventDescriptor.list()
+//            parameters.insert(NSAppleEventDescriptor(string: "Hello Cruel World!"), at: 0)
+//
+//            let event = NSAppleEventDescriptor(
+//                eventClass: AEEventClass(kASAppleScriptSuite),
+//                eventID: AEEventID(kASSubroutineEvent),
+//                targetDescriptor: nil,
+//                returnID: AEReturnID(kAutoGenerateReturnID),
+//                transactionID: AETransactionID(kAnyTransactionID)
+//            )
+//
+//            let urlPath = Bundle.main.url(forResource: "ResizeWindow", withExtension: "scpt")
+//            let appleScript = try! NSUserAppleScriptTask(url: urlPath!)
+//            appleScript.execute(withAppleEvent: event) { (appleEvent, error) in
+//                if let error = error {
+//                    print(error)
+//                }
+//            }
+            
+        }
+        
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -54,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         print("\(quoteText) — \(quoteAuthor)")
     }
-
+    
     func constructMenu() {
         let menu = NSMenu()
         

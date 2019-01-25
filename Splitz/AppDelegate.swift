@@ -13,6 +13,37 @@ import Carbon
 class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     
+    var script: NSAppleScript = {
+        let script = NSAppleScript(source: """
+            on resizeWindow(x1, y1, x2, y2)
+            tell application "System Events"
+                set frontmostApplication to name of the first process whose frontmost is true
+            end tell
+
+            tell application "System Events" to tell application process frontmostApplication
+                try
+                    #return properties of window 2
+                    #for chrome is window 2
+                    #repeat with x from 1 to (count windows)
+                        get properties of window 1
+                        set position of window 1 to {x1, y1}
+                        set size of window 1 to {x2, y2}
+                    #end repeat
+                end try
+                #set position of the first window to {x1, y1}
+                #set size of the first window to {x2, y2}
+                #set bounds of the first window to {x1, y1, x2, y2}
+
+            end tell
+            end resizeWindow
+        """
+            )!
+        let success = script.compileAndReturnError(nil)
+        assert(success)
+        return script
+    }()
+    
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         if let button = statusItem.button {
@@ -27,9 +58,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //            print(NSStringFromRect(screen.visibleFrame))
 //        }
         
-        ResizeWindowScript.load()
-        let resizeScript = ResizeWindowScript.resizeWindow() as! AppleScriptProtocol
-        
+        let parameters = NSAppleEventDescriptor.list()
+        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
+
+        let event = NSAppleEventDescriptor(
+            eventClass: AEEventClass(kASAppleScriptSuite),
+            eventID: AEEventID(kASSubroutineEvent),
+            targetDescriptor: nil,
+            returnID: AEReturnID(kAutoGenerateReturnID),
+            transactionID: AETransactionID(kAnyTransactionID)
+        )
+
+        event.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
+        event.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
+
         NSEvent.addGlobalMonitorForEvents(matching: .leftMouseUp) { (mevent) in
             let appName = NSWorkspace.shared.frontmostApplication?.localizedName
             print("app name: \(String(describing: appName))")
@@ -38,27 +83,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let mainScreen = NSScreen.main
             print(NSStringFromRect((mainScreen!.frame)))
             
-            resizeScript.resizeWindow()
-
-//            let parameters = NSAppleEventDescriptor.list()
-//            parameters.insert(NSAppleEventDescriptor(string: "Hello Cruel World!"), at: 0)
-//
-//            let event = NSAppleEventDescriptor(
-//                eventClass: AEEventClass(kASAppleScriptSuite),
-//                eventID: AEEventID(kASSubroutineEvent),
-//                targetDescriptor: nil,
-//                returnID: AEReturnID(kAutoGenerateReturnID),
-//                transactionID: AETransactionID(kAnyTransactionID)
-//            )
-//
-//            let urlPath = Bundle.main.url(forResource: "ResizeWindow", withExtension: "scpt")
-//            let appleScript = try! NSUserAppleScriptTask(url: urlPath!)
-//            appleScript.execute(withAppleEvent: event) { (appleEvent, error) in
-//                if let error = error {
-//                    print(error)
-//                }
-//            }
-            
+            var error: NSDictionary? = nil
+            let result = self.script.executeAppleEvent(event, error: &error) as NSAppleEventDescriptor?
+            print(result as Any)
+            print(error as Any)
         }
         
     }

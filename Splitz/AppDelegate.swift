@@ -22,18 +22,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             tell application "System Events" to tell application process frontmostApplication
                 try
-                    #return properties of window 2
-                    #for chrome is window 2
-                    #repeat with x from 1 to (count windows)
-                        get properties of window 1
+                    if frontmostApplication is "Google Chrome" then
+                        set position of window 2 to {x1, y1}
+                        set size of window 2 to {x2, y2}
+                    else
                         set position of window 1 to {x1, y1}
                         set size of window 1 to {x2, y2}
-                    #end repeat
-                end try
-                #set position of the first window to {x1, y1}
-                #set size of the first window to {x2, y2}
-                #set bounds of the first window to {x1, y1, x2, y2}
+                    end if
 
+                    #return properties of windows
+                end try
             end tell
             end resizeWindow
         """
@@ -58,35 +56,87 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //            print(NSStringFromRect(screen.visibleFrame))
 //        }
         
-        let parameters = NSAppleEventDescriptor.list()
-        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
-        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
-        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
-        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
 
-        let event = NSAppleEventDescriptor(
+        let eventDescriptor = NSAppleEventDescriptor(
             eventClass: AEEventClass(kASAppleScriptSuite),
             eventID: AEEventID(kASSubroutineEvent),
             targetDescriptor: nil,
             returnID: AEReturnID(kAutoGenerateReturnID),
             transactionID: AETransactionID(kAnyTransactionID)
         )
-
-        event.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
-        event.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
-
-        NSEvent.addGlobalMonitorForEvents(matching: .leftMouseUp) { (mevent) in
-            let appName = NSWorkspace.shared.frontmostApplication?.localizedName
-            print("app name: \(String(describing: appName))")
-            print(NSEvent.mouseLocation)
+        
+        let parameters = NSAppleEventDescriptor.list()
+        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
+        
+        eventDescriptor.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
+        eventDescriptor.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
+        
+        var mainScreen: NSScreen = NSScreen.main!
+        var mouseDidDragged = false
+        var shouldCallForMouseDrag = true
+        
+        let windowOptions = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
+        var windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
+        
+        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown]) { (mouseEvent) in
             
-            let mainScreen = NSScreen.main
-            print(NSStringFromRect((mainScreen!.frame)))
+                shouldCallForMouseDrag = true
+                mouseDidDragged = false
+                let appName = NSWorkspace.shared.frontmostApplication?.localizedName
+                print("app name: \(String(describing: appName!))")
+                
+                windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
+                for window in windowList as! [NSDictionary]{
+                    if window.value(forKey: "kCGWindowLayer") as? integer_t == 0 && window.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
+                        print(window)
+                        return
+                    }
+                }
             
-            var error: NSDictionary? = nil
-            let result = self.script.executeAppleEvent(event, error: &error) as NSAppleEventDescriptor?
-            print(result as Any)
-            print(error as Any)
+        }
+        
+        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDragged]) { (mouseEvent) in
+            if shouldCallForMouseDrag {
+                shouldCallForMouseDrag = false
+                mouseDidDragged = true
+//                let appName = NSWorkspace.shared.frontmostApplication?.localizedName
+//                print("app name: \(String(describing: appName!))")
+                
+//                windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
+//                for window in windowList as! [NSDictionary]{
+//                    if window.value(forKey: "kCGWindowLayer") as? integer_t == 0 && window.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
+//                        print(window)
+//                        return
+//                    }
+//                }
+            }
+        }
+        
+        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseUp]) { (mouseEvent) in
+            if mouseDidDragged {
+                shouldCallForMouseDrag = true
+                mouseDidDragged = false
+                
+//                print(NSEvent.mouseLocation)
+//                mainScreen = NSScreen.main!
+//                print(NSStringFromRect(mainScreen.frame))
+                
+                windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
+                for windowInfo in windowList as! [NSDictionary]{
+                    if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
+                        print(windowInfo)
+                        return
+                    }
+                }
+                
+//                var error: NSDictionary? = nil
+//                let result = self.script.executeAppleEvent(eventDescriptor, error: &error) as NSAppleEventDescriptor?
+//                print(result! as Any)
+//                print(error! as Any)
+            }
         }
         
     }

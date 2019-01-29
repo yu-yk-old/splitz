@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     if frontmostApplication is "Google Chrome" then
                         set position of window 2 to {x1, y1}
                         set size of window 2 to {x2, y2}
+                        set bounds of window2 to {x1, y1, x2, y2}
                     else
                         set position of window 1 to {x1, y1}
                         set size of window 1 to {x2, y2}
@@ -41,22 +42,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return script
     }()
     
+    var mouseDidDragged = false
+    var shouldCallForMouseDrag = true
+    var originalPos: [String:integer_t] = [:]
+    var finalPos: [String:integer_t] = [:]
+    
+    let windowOptions = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
+    var windowList: [NSDictionary] = []
+    
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        if let button = statusItem.button {
-            button.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
-            button.action = #selector(printQuote(_:))
-        }
-        
-        constructMenu()
-        
-//        let screens = NSScreen.screens
-//        for screen in screens {
-//            print(NSStringFromRect(screen.visibleFrame))
-//        }
-        
-
         let eventDescriptor = NSAppleEventDescriptor(
             eventClass: AEEventClass(kASAppleScriptSuite),
             eventID: AEEventID(kASSubroutineEvent),
@@ -65,80 +61,81 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             transactionID: AETransactionID(kAnyTransactionID)
         )
         
-        let parameters = NSAppleEventDescriptor.list()
-        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
-        parameters.insert(NSAppleEventDescriptor(int32: 0), at: 0)
-        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
-        parameters.insert(NSAppleEventDescriptor(int32: 500), at: 0)
-        
-        eventDescriptor.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
-        eventDescriptor.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
-        
-        var mainScreen: NSScreen = NSScreen.main!
-        var mouseDidDragged = false
-        var shouldCallForMouseDrag = true
-        
-        let windowOptions = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
-        var windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
-        
-        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown]) { (mouseEvent) in
-            
-                shouldCallForMouseDrag = true
-                mouseDidDragged = false
+        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDragged]) { (mouseEvent) in
+            if self.shouldCallForMouseDrag {
+                self.shouldCallForMouseDrag = false
+                self.mouseDidDragged = true
                 let appName = NSWorkspace.shared.frontmostApplication?.localizedName
                 print("app name: \(String(describing: appName!))")
                 
-                windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
-                for window in windowList as! [NSDictionary]{
-                    if window.value(forKey: "kCGWindowLayer") as? integer_t == 0 && window.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
-                        print(window)
+                self.windowList = CGWindowListCopyWindowInfo(self.windowOptions, kCGNullWindowID) as! [NSDictionary]
+                for windowInfo in self.windowList {
+                    if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
+                        self.originalPos = windowInfo.value(forKey: "kCGWindowBounds") as! [String:integer_t]
                         return
                     }
                 }
-            
-        }
-        
-        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDragged]) { (mouseEvent) in
-            if shouldCallForMouseDrag {
-                shouldCallForMouseDrag = false
-                mouseDidDragged = true
-//                let appName = NSWorkspace.shared.frontmostApplication?.localizedName
-//                print("app name: \(String(describing: appName!))")
-                
-//                windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
-//                for window in windowList as! [NSDictionary]{
-//                    if window.value(forKey: "kCGWindowLayer") as? integer_t == 0 && window.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
-//                        print(window)
-//                        return
-//                    }
-//                }
             }
         }
         
         NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseUp]) { (mouseEvent) in
-            if mouseDidDragged {
-                shouldCallForMouseDrag = true
-                mouseDidDragged = false
+            if self.mouseDidDragged {
+                self.shouldCallForMouseDrag = true
+                self.mouseDidDragged = false
                 
-//                print(NSEvent.mouseLocation)
-//                mainScreen = NSScreen.main!
-//                print(NSStringFromRect(mainScreen.frame))
-                
-                windowList = CGWindowListCopyWindowInfo(windowOptions, kCGNullWindowID)
-                for windowInfo in windowList as! [NSDictionary]{
-                    if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
-                        print(windowInfo)
-                        return
+                print("mouse location: \(NSEvent.mouseLocation)")
+                let mainScreen = NSScreen.main!
+                if NSEvent.mouseLocation.x <= mainScreen.frame.minX+1.0 {
+                    let parameters = self.getPosDescriptor(mainScreen: mainScreen, lfbt: "left")
+                    eventDescriptor.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
+                    eventDescriptor.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
+                    self.windowList = CGWindowListCopyWindowInfo(self.windowOptions, kCGNullWindowID) as! [NSDictionary]
+                    for windowInfo in self.windowList {
+                        if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
+                            self.finalPos = windowInfo.value(forKey: "kCGWindowBounds") as! [String : integer_t]
+                            print(self.finalPos)
+                            if self.originalPos["X"]! != self.finalPos["X"]! || self.originalPos["Y"]! != self.finalPos["Y"] {
+                                print("window moved!")
+                                var error: NSDictionary? = nil
+                                let result = self.script.executeAppleEvent(eventDescriptor, error: &error) as NSAppleEventDescriptor?
+                                print(result! as Any)
+                                print(error as Any)
+                            }
+                            return
+                        }
                     }
+
+                } else if NSEvent.mouseLocation.x >= mainScreen.frame.maxX-1.0{
+                    let parameters = self.getPosDescriptor(mainScreen: mainScreen, lfbt: "right")
+                    eventDescriptor.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
+                    eventDescriptor.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
+                    self.windowList = CGWindowListCopyWindowInfo(self.windowOptions, kCGNullWindowID) as! [NSDictionary]
+                    for windowInfo in self.windowList {
+                        if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
+                            self.finalPos = windowInfo.value(forKey: "kCGWindowBounds") as! [String : integer_t]
+                            print(self.finalPos)
+                            if self.originalPos["X"]! != self.finalPos["X"]! || self.originalPos["Y"]! != self.finalPos["Y"] {
+                                print("window moved!")
+                                var error: NSDictionary? = nil
+                                let result = self.script.executeAppleEvent(eventDescriptor, error: &error) as NSAppleEventDescriptor?
+                                print(result! as Any)
+                                print(error as Any)
+                            }
+                            return
+                        }
+                    }
+
                 }
-                
-//                var error: NSDictionary? = nil
-//                let result = self.script.executeAppleEvent(eventDescriptor, error: &error) as NSAppleEventDescriptor?
-//                print(result! as Any)
-//                print(error! as Any)
             }
         }
         
+        
+        if let button = statusItem.button {
+            button.image = NSImage(named:NSImage.Name("StatusBarButtonImage"))
+            button.action = #selector(printQuote(_:))
+        }
+        
+        constructMenu()
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -162,5 +159,53 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem.menu = menu
     }
     
+    func getPosDescriptor(mainScreen: NSScreen, lfbt: String) -> NSAppleEventDescriptor {
+        
+        let parameters = NSAppleEventDescriptor.list()
+        var x, y, width, height: Int32
+        print("minX, Y: \(mainScreen.frame.minX, mainScreen.frame.minY)")
+        print("midX, Y: \(mainScreen.frame.midX, mainScreen.frame.midY)")
+        print("maxX, Y: \(mainScreen.frame.maxX, mainScreen.frame.maxY)")
+        if mainScreen.frame.minY != 0.0 {
+            y = Int32(mainScreen.frame.minY - mainScreen.frame.maxY)
+        } else {
+            y = Int32(mainScreen.frame.minY)
+        }
+        switch lfbt {
+        case "left":
+            x = Int32(mainScreen.frame.minX)
+            y = Int32(y)
+            width = Int32(mainScreen.frame.width/2)
+            height = Int32(mainScreen.frame.height)
+        case "right":
+            x = Int32(mainScreen.frame.midX)
+            y = Int32(y)
+            width = Int32(mainScreen.frame.width/2)
+            height = Int32(mainScreen.frame.height)
+//        case "bottom":
+//            x = Int32(mainScreen.frame.minX)
+//            y = Int32(mainScreen.frame.height/2)
+//            width = Int32(mainScreen.frame.maxX)
+//            height = Int32(mainScreen.frame.height/2)
+//        case "top":
+//            x = Int32(mainScreen.frame.minX)
+//            y = Int32(y)
+//            width = Int32(mainScreen.frame.maxX)
+//            height = Int32(mainScreen.frame.height/2)
+        default:
+            x = Int32(mainScreen.frame.minX)
+            y = Int32(y)
+            width = Int32(mainScreen.frame.maxX)
+            height = Int32(mainScreen.frame.height)
+        }
+        
+        parameters.insert(NSAppleEventDescriptor(int32: x), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: y), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: width), at: 0)
+        parameters.insert(NSAppleEventDescriptor(int32: height), at: 0)
+        
+        
+        return parameters
+    }
 }
 

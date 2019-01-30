@@ -24,3 +24,23 @@
 #        
 #    end resizeWindow
 #end script
+
+
+#on resizeWindow(x1, y1, x2, y2)
+#    tell application "System Events"
+#        set frontmostApplication to name of the first process whose frontmost is true
+#    end tell
+#    
+#    tell application "System Events" to tell application process frontmostApplication
+#    try
+#        if frontmostApplication is "Google Chrome" then
+#            set position of window 2 to {x1, y1}
+#            set size of window 2 to {x2, y2}
+#            else
+#            set position of window 1 to {x1, y1}
+#            set size of window 1 to {x2, y2}
+#        end if
+#        
+#    end try
+#end tell
+#end resizeWindow

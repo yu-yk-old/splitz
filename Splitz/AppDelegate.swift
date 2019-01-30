@@ -22,16 +22,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             tell application "System Events" to tell application process frontmostApplication
                 try
-                    if frontmostApplication is "Google Chrome" then
-                        set position of window 2 to {x1, y1}
-                        set size of window 2 to {x2, y2}
-                        set bounds of window2 to {x1, y1, x2, y2}
-                    else
-                        set position of window 1 to {x1, y1}
-                        set size of window 1 to {x2, y2}
-                    end if
+                    repeat with x from 1 to (count windows)
+                        if subrole of window x is "AXStandardWindow" then
+                            set position of window x to {x1, y1}
+                            set size of window x to {x2, y2}
+                            return properties of windows
+                        end if
 
-                    #return properties of windows
+                        #if frontmostApplication is "Google Chrome" then
+                        #    if subrole of window x is "AXStandardWindow" then
+                        #        set position of window x to {x1, y1}
+                        #        set size of window x to {x2, y2}
+                        #        return properties of windows
+                        #    end if
+                        #else
+                        #    if subrole of window x is "AXStandardWindow" and focused of window x is true
+                        #        set position of window x to {x1, y1}
+                        #        set size of window x to {x2, y2}
+                        #        return properties of windows
+                        #    end if
+                        #end if
+                    end repeat
+                    return properties of windows
                 end try
             end tell
             end resizeWindow
@@ -90,10 +102,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     eventDescriptor.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
                     eventDescriptor.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
                     self.windowList = CGWindowListCopyWindowInfo(self.windowOptions, kCGNullWindowID) as! [NSDictionary]
+//                    print(self.windowList)
                     for windowInfo in self.windowList {
                         if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
                             self.finalPos = windowInfo.value(forKey: "kCGWindowBounds") as! [String : integer_t]
-                            print(self.finalPos)
+//                            print(self.finalPos)
                             if self.originalPos["X"]! != self.finalPos["X"]! || self.originalPos["Y"]! != self.finalPos["Y"] {
                                 print("window moved!")
                                 var error: NSDictionary? = nil
@@ -110,15 +123,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     eventDescriptor.setDescriptor(NSAppleEventDescriptor(string: "resizeWindow"), forKeyword: AEKeyword(keyASSubroutineName))
                     eventDescriptor.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
                     self.windowList = CGWindowListCopyWindowInfo(self.windowOptions, kCGNullWindowID) as! [NSDictionary]
+//                    print(self.windowList)
                     for windowInfo in self.windowList {
                         if windowInfo.value(forKey: "kCGWindowLayer") as? integer_t == 0 && windowInfo.value(forKey: "kCGWindowAlpha") as? integer_t == 1 {
                             self.finalPos = windowInfo.value(forKey: "kCGWindowBounds") as! [String : integer_t]
-                            print(self.finalPos)
+//                            print(self.finalPos)
                             if self.originalPos["X"]! != self.finalPos["X"]! || self.originalPos["Y"]! != self.finalPos["Y"] {
                                 print("window moved!")
                                 var error: NSDictionary? = nil
                                 let result = self.script.executeAppleEvent(eventDescriptor, error: &error) as NSAppleEventDescriptor?
-                                print(result! as Any)
+                                print(result as Any)
                                 print(error as Any)
                             }
                             return
@@ -163,9 +177,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let parameters = NSAppleEventDescriptor.list()
         var x, y, width, height: Int32
-        print("minX, Y: \(mainScreen.frame.minX, mainScreen.frame.minY)")
-        print("midX, Y: \(mainScreen.frame.midX, mainScreen.frame.midY)")
-        print("maxX, Y: \(mainScreen.frame.maxX, mainScreen.frame.maxY)")
+//        print("minX, Y: \(mainScreen.frame.minX, mainScreen.frame.minY)")
+//        print("midX, Y: \(mainScreen.frame.midX, mainScreen.frame.midY)")
+//        print("maxX, Y: \(mainScreen.frame.maxX, mainScreen.frame.maxY)")
         if mainScreen.frame.minY != 0.0 {
             y = Int32(mainScreen.frame.minY - mainScreen.frame.maxY)
         } else {
